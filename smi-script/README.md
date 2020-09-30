@@ -7,8 +7,8 @@ Pre-requsities
 --------------
 
 * Recent Kubernetes cluster created with `kubectl` CLI installed - [Steps](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
-* Helm (v2) - client and Tiller setup in Kubernetes with RBAC role binding configured - [Steps](https://docs.microsoft.com/en-us/azure/aks/kubernetes-helm)
-* Linkerd 2.4+ installed - client and server components (control plane) - [Steps](https://linkerd.io/2/tasks/install/)
+* Helm (v3) - [Steps](https://helm.sh/docs/intro/install/)
+* Linkerd 2.8+ installed - client and server components (control plane) - [Steps](hhttps://linkerd.io/2/tasks/install/)
 * Locally cloned `bookinfo` sample app - Steps: `git clone git@github.com:clarenceb/bookinfo.git; cd bookinfo/`
 
 Demo Script
@@ -29,7 +29,7 @@ Visit: [`http://localhost:50750`](http://localhost:50750) in your browser.
 Deploy the initial `bookinfo` sample app, meshed with Linkerd:
 
 ```sh
-
+kubectl create ns bookinfo
 linkerd inject ./platform/kube/bookinfo.yaml | kubectl apply -n bookinfo -f -
 
 watch kubectl get pod -n bookinfo  # CTRL+C to exit
@@ -40,7 +40,7 @@ kubectl port-forward -n bookinfo svc/productpage 9080:9080 &
 
 View the app: [`http://localhost:9080`](http://localhost:9080)
 
-Click 'Test user' to see reviews (`http://localhost:9080/productpage?u=test`)
+Click 'Test user' to see reviews [`http://localhost:9080/productpage?u=test`](http://localhost:9080/productpage?u=test)
 
 Reload the page several times: You should see the reviews cycle through 3 versions of ratings (**v1** - no stars, **v2** - red stars, **v3** - black stars)
 
@@ -54,13 +54,13 @@ You can see that there are 3 versions of the review service already deployed:
 * `reviews-2`
 * `reviews-3`
 
-Click the `productpage-v1` deployment (`http://localhost:50750/namespaces/bookinfo/deployments/productpage-v1`).
+Click the `productpage-v1` [deployment](http://localhost:50750/namespaces/bookinfo/deployments/productpage-v1).
 
 Here you can see the call graph with success rates, RPS, etc.  You can also see  **Live Calls** which shows the outbound connections to downstream services.
 
 Try clicking the `Tap` link on one of the outbound calls and starting a tap on one of the routes.
 
-Currently, there are no **Traffic Splits** defined (http://localhost:50750/namespaces/bookinfo/trafficsplits).
+Currently, there are no **Traffic Splits** defined, see: [http://localhost:50750/namespaces/bookinfo/trafficsplits](http://localhost:50750/namespaces/bookinfo/trafficsplits).
 
 ### Define SMI Traffic Splits
 
@@ -93,9 +93,9 @@ kubectl describe trafficsplit.split.smi-spec.io/reviews-rollout -n bookinfo
 
 Back in the [`bookinfo`](http://localhost:9080/productpage?u=test) app, if you reload the page you'll only get black and red star ratings.
 
-If you check the Linkerd **Traffic Split** page (`http://localhost:50750/namespaces/bookinfo/trafficsplits`) you'll see the split is 50/50.
+If you check the Linkerd **Traffic Split** page [http://localhost:50750/namespaces/bookinfo/trafficsplits](http://localhost:50750/namespaces/bookinfo/trafficsplits) you'll see the split is 50/50.
 
-Click the `reviews-rollout` traffic split object (`http://localhost:50750:50750/namespaces/bookinfo/trafficsplits/reviews-rollout`) to see this in more detail.
+Click the `reviews-rollout` traffic split object [http://localhost:50750/namespaces/bookinfo/trafficsplits/reviews-rollout](http://localhost:50750/namespaces/bookinfo/trafficsplits/reviews-rollout) to see this in more detail.
 
 After a while of generating requests, you'll see that no traffic goes to [`reviews-1`](http://localhost:50750/namespaces/bookinfo/deployments/productpage-v1).
 
@@ -108,7 +108,7 @@ kubectl describe trafficsplit.split.smi-spec.io/reviews-rollout -n bookinfo
 
 Reload the `bookinfo` app (`http://localhost:9080/productpage?u=test`) -- only red stars ratings should appear and only `review-3` should be getting traffic (`http://localhost:50750/namespaces/bookinfo/deployments/productpage-v1`)
 
-To fianlise the rollout, you would:
+To finalise the rollout, you would:
 
 * Update the traffic split to only list `reviews-v3` as a backend with `100` weight
 * Delete the `review-v2` service
