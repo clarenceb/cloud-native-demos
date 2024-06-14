@@ -1,5 +1,9 @@
 # Cloud Native Demos
 
+* [App Gateway for Containers Demo](https://github.com/clarenceb/appgw4containers) - AKS App Gateway for Containers demo, showing how to use HTTPRoute in Gateway API to split traffic or route to a specific app version.
+* [KAITO demo](https://github.com/clarenceb/aks-store-demo/blob/main/Demo-Steps.md) - Kubernetes AI Toolchain Operator demo using AKS Store Demo to route to a Falco 7B Instruct model for LLM chat api use
+* [Gator CLI Tests](https://github.com/clarenceb/gator-helm-test) - Example of using Gator CLI with Helm charts. This is just a basic example and doesn't showcase all the features of Gatekeeper or Gator CLI.
+* [Playwright Basic Demo](https://github.com/clarenceb/playwright-basic-demo) - Playwright basic demo with GitHub Actions and Microsoft Playwright Testing
 * [Traefik Ingress Example](https://github.com/clarenceb/traefik-ingress-example) - Demo using the Traefik ingress controller in AKS.
 * [Basic KEDA Example](https://github.com/clarenceb/cloud-native-demos/tree/master/keda-script) - Demos of KEDA using RabbitMQ & Azure Storage Queue as event sources.
 * [KEDA with Prometheus Scaler](https://github.com/clarenceb/keda-prometheus-scaler-demo) - Using KEDA to scale a Windows deployment using NGINX Ingress Controller RPS metrics
