@@ -1,6 +1,6 @@
 # Cloud Native and AI Apps Demos
 
-* [https://github.com/clarenceb/terraform-apim](https://github.com/clarenceb/terraform-apim) - Terraform management of Azure API Management Dynamic Policies using TF templates
+* [Azure API Management Dynamic Policies with Terraform templates](https://github.com/clarenceb/terraform-apim) - Terraform management of Azure API Management Dynamic Policies using TF templates
 * [DALL-E 3 LB with APIM](https://github.com/clarenceb/apim-dalle-lb) - Basic example of load-balancing multiple DALLE-3 models across different Azure regions
 * [Azure API Management to Gemini API demo](https://github.com/clarenceb/apim-gemini-demo) - Using APIM to front Gemini LLM
 * [App Gateway for Containers Demo](https://github.com/clarenceb/appgw4containers) - AKS App Gateway for Containers demo, showing how to use HTTPRoute in Gateway API to split traffic or route to a specific app version.
